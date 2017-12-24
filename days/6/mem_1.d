@@ -13,7 +13,7 @@ int[] redis(int[] intArr){
 	intArr[idx] = 0;
 	while(max > 0){
 		idx++;
-		if(idx > intArr.length){
+		if(idx >= intArr.length){
 			idx = 0;
 		}
 		intArr[idx]++;
@@ -28,14 +28,17 @@ int redistLoop(int[] mem){
 	int[int[]] seen;
 	int[] current = mem;
 	seen[mem.idup] = 1;
-	
-	writeln(maxIndex(mem));
+	int* p;
+	//~ p = (current in aa);
+	//~ writeln(maxIndex(mem));
 	do{
+		seen[current.idup] = iters;
 		current = redis(current);
-		seen[current.idup] = 1;
+		writeln(current);
 		iters++;
-	}while(seen[current] != 1);
-	return iters;
+	}while(!(current in seen));
+	writeln(iters - seen[current]);
+	return iters ;
 }
 
 void main(string[] args){
